@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Mi Niño Hermoso</title>
+    <!-- Enlace al estilo externo -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="card">
+        <div class="heart-icon">💕</div>
+        <h1>Para mi niño hermoso</h1>
+        
+        <p class="message">
+            Hay canciones que te transportan a momentos felices, pero a mí me basta con pensar en ti para que se me alegre el corazón. Este espacio es solo un pedacito de todo el amor que te tengo. Dale Play cada vez que me extrañes, para recordar que siempre, siempre estoy contigo. ¡Te amo muchísimo mi niño hermoso!
+        </p>
+        
+        <!-- Reproductor personalizado -->
+        <div class="player-container">
+            <p class="song-title">🎵 Lugar Seguro</p>
+            
+            <!-- Elemento de audio nativo (Oculto para usar tus botones) -->
+            <audio id="miMusica" loop>
+                <source src="Lugar seguro.mp3" type="audio/mpeg">
+                Tu navegador no soporta este elemento de audio.
+            </audio>
+
+            <!-- BARRA DE PROGRESO NUEVA -->
+            <div class="progress-container">
+                <span id="tiempoActual" class="time-text">0:00</span>
+                <input type="range" id="barraProgreso" min="0" value="0" step="1" oninput="adelantarMusica(this.value)">
+                <span id="tiempoTotal" class="time-text">0:00</span>
+            </div>
+
+            <!-- Botones de Control Personalizados -->
+            <div class="controls">
+                <button class="btn btn-play" id="btnPlay" onclick="controlarMusica('play')">Play</button>
+                <button class="btn btn-pause" id="btnPause" onclick="controlarMusica('pause')" style="display: none;">Pausa</button>
+            </div>
+
+            <!-- Control de Volumen Personalizado -->
+            <div class="volume-container">
+                <span class="volume-label">🔈</span>
+                <input type="range" id="volumen" min="0" max="1" step="0.05" value="0.5" oninput="ajustarVolumen(this.value)">
+                <span class="volume-label">🔊</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const audio = document.getElementById('miMusica');
+        const btnPlay = document.getElementById('btnPlay');
+        const btnPause = document.getElementById('btnPause');
+        
+        // Elementos de la barra de progreso
+        const barraProgreso = document.getElementById('barraProgreso');
+        const textoTiempoActual = document.getElementById('tiempoActual');
+        const textoTiempoTotal = document.getElementById('tiempoTotal');
+
+        // Establecer el volumen inicial al 50%
+        audio.volume = 0.5;
+
+        // Función para dar formato al tiempo (ej. 01:25)
+        function darFormatoTiempo(segundos) {
+            const min = Math.floor(segundos / 60);
+            const seg = Math.floor(segundos % 60);
+            return `${min}:${seg < 10 ? '0' : ''}${seg}`;
+        }
+
+        // Cargar la duración total de la canción cuando el archivo esté listo
+        audio.addEventListener('loadedmetadata', () => {
+            barraProgreso.max = Math.floor(audio.duration);
+            textoTiempoTotal.textContent = darFormatoTiempo(audio.duration);
+        });
+
+        // Actualizar la barra de progreso automáticamente mientras suena
+        audio.addEventListener('timeupdate', () => {
+            barraProgreso.value = Math.floor(audio.currentTime);
+            textoTiempoActual.textContent = darFormatoTiempo(audio.currentTime);
+        });
+
+        // Función para adelantar o retroceder cuando el usuario arrastra la barra
+        function adelantarMusica(valor) {
+            audio.currentTime = valor;
+        }
+
+        // Controles de Play/Pausa
+        function controlarMusica(accion) {
+            if (accion === 'play') {
+                audio.play().then(() => {
+                    btnPlay.style.display = 'none';
+                    btnPause.style.display = 'inline-block';
+                }).catch(error => {
+                    console.log("Error al reproducir el audio:", error);
+                });
+            } else if (accion === 'pause') {
+                audio.pause();
+                btnPlay.style.display = 'inline-block';
+                btnPause.style.display = 'none';
+            }
+        }
+
+        // Control de volumen
+        function ajustarVolumen(valor) {
+            audio.volume = valor;
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,185 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    /* Fondo degradado suave en tonos azules claros */
+    background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #7dd3fc 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 40px 30px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(125, 211, 252, 0.5); /* Sombra azulada */
+    text-align: center;
+    max-width: 420px;
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    animation: fadeIn 1.2s ease-in-out;
+}
+
+.heart-icon {
+    font-size: 55px;
+    margin-bottom: 15px;
+    animation: heartbeat 1.5s infinite;
+    display: inline-block;
+}
+
+h1 {
+    color: #0369a1; /* Azul profundo y elegante para el título */
+    font-size: 26px;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.message {
+    color: #475569; /* Gris azulado para que la lectura sea suave */
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+/* Contenedor del Reproductor */
+.player-container {
+    background: #ffffff;
+    padding: 25px 20px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.song-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #64748b;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Estilos de la barra de progreso */
+.progress-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.time-text {
+    font-size: 12px;
+    color: #64748b;
+    font-weight: bold;
+    min-width: 35px;
+}
+
+#barraProgreso {
+    width: 100%;
+}
+
+/* Botones de control */
+.controls {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 22px;
+}
+
+.btn {
+    border: none;
+    color: white;
+    padding: 12px 35px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 130px;
+}
+
+.btn-play {
+    background: #38bdf8; /* Azul claro vibrante */
+    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.4);
+}
+
+.btn-play:hover {
+    background: #0ea5e9; /* Azul más intenso al pasar el mouse */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(14, 165, 233, 0.5);
+}
+
+.btn-pause {
+    background: #94a3b8;
+    box-shadow: 0 4px 12px rgba(148, 163, 184, 0.3);
+}
+
+.btn-pause:hover {
+    background: #64748b;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(100, 116, 139, 0.4);
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+/* Control de Volumen y Progreso */
+.volume-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.volume-label {
+    font-size: 14px;
+    user-select: none;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    background: #e0f2fe; /* Fondo de la barra azul muy claro */
+    border-radius: 5px;
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #0ea5e9; /* Bolita azul para arrastrar */
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.3);
+}
+
+/* Animaciones */
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.1); }
+    60% { transform: scale(1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
